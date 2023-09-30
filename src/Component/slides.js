@@ -7,8 +7,11 @@ function addWritingSlide() {
         firstSlideAdded = true;
     } else {
         slideIndex++;
-        const slideElement = document.createElement('div');
-        slideElement.textContent = `Writing Slide ${slideIndex}`;
+        const slideElement = document.createElement('canvas');
+        // slideElement.textContent = `Writing Slide ${slideIndex}`;
+        // slideElement.classList.add('writing-slide');
+        // document.getElementById('slide-container').appendChild(slideElement);
+        slideElement.id = `canvas-${slideIndex}`;
         slideElement.classList.add('writing-slide');
         document.getElementById('slide-container').appendChild(slideElement);
     }
@@ -19,14 +22,9 @@ document.getElementById('add-slide-button').addEventListener('click', addWriting
 // Function to create a writing board
 function createWritingBoard() {
     slideIndex++;
-    const slideElement = document.createElement('div');
-    slideElement.innerHTML = `
-        <div class="writing-board">
-            <textarea class="writing-area" placeholder="Start writing..."></textarea>
-        </div>
-    `;
-    slideElement.classList.add('writing-slide');
-    document.getElementById('slide-container').appendChild(slideElement);
+    const canvasElement = document.createElement('canvas');
+    canvasElement.classList.add('writing-slide');
+    document.getElementById('slide-container').appendChild(canvasElement);
 }
 
 function plusSlides(n) {
