@@ -1,0 +1,40 @@
+/* Style for the writing slides */
+.writing-slide {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 100px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    padding: 5px;
+}
+
+#add-slide-button {
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.prev {
+    cursor: pointer;
+    border-radius: 30%;
+}
+
+.next {
+    cursor: pointer;
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.main-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+}
+canvas{
+    border: 2px solid #f0f0f0;
+
+}
