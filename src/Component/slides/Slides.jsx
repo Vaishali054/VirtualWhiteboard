@@ -68,15 +68,15 @@ export default function Slides() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item active">
-                  <a href="#" className="nav-link active">
+                  <div className="nav-link active">
                     Home
-                  </a>
+                  </div>
                 </li>
                 {/* Add New Slide Dropdown */}
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Add New Slide
-                  </a>
+                  </div>
                   {/* Dropdown Menu */}
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                     {/* Content inside the dropdown */}
@@ -102,9 +102,9 @@ export default function Slides() {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link">
+                  <div className="nav-link">
                     Profile
-                  </a>
+                  </div>
                 </li>
               </ul>
             </div>
