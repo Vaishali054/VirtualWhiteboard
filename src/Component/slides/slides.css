@@ -4,18 +4,18 @@
         width: 80% ;
         height: auto;
     }    
-}
-@media screen and (min-width: 769px) {
+  }
+  @media screen and (min-width: 769px) {
     canvas{
     width: 70%;
     height: auto;
     }
-}
-body{
+  }
+  body{
     margin-top: 20px;
     margin-left: 0;
-}
-.writing-slide {
+  }
+  .writing-slide {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 100px;
@@ -23,43 +23,44 @@ body{
     height: 100%;
     background-color: black;
     padding: 5px;
-}
-
-#add-slide-button {
+  }
+  
+  #add-slide-button {
     cursor: pointer; /* Change cursor to pointer on hover */
     margin: 10px;
-}
-
-.prev {
+  }
+  
+  .prev {
     cursor: pointer;
-    border-radius: 30%;
-}
-
-.next {
+  }
+  
+  .next {
     cursor: pointer;
-}
-
-.container {
+  }
+  
+  .container {
     /* justify-content: left;
     align-items: left;
     display: flex; */
     margin: 0;
     padding: 5px;
     
-}
-
-.main-container {
+  }
+  
+  .main-container {
     justify-content: center;
     align-items: center;
     display: flex;
     height: 100vh;
     margin-top: 0px;
-}
-canvas{
+  }
+  canvas{
     border: 2px solid #f0f0f0;
     margin: 0;
     padding: 0;
-}
-.slide-container{
+  }
+  .slide-container{
     margin-top: 5px;
-}
+  }
+  
+  
