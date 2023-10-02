@@ -4,7 +4,7 @@ import './ColorPalette.css';
 function ColorPalette() {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedTool, setSelectedTool] = useState(null);
-
+ const colors = ['black', 'blue', 'brown', 'red', 'pink', 'yellow'];
   const handleColorClick = (color) => {
     setSelectedColor(color);
   };
@@ -14,61 +14,31 @@ function ColorPalette() {
   };
 
   return (
-    <div className="container">
+    <div className="palette-container">
       <div className="color-palette">
-        <div
-          className={`color-box black ${
-            selectedColor === 'black' ? 'selected' : ''
-          }`}
-          onClick={() => handleColorClick('black')}
-        ></div>
-        <div
-          className={`color-box blue ${
-            selectedColor === 'blue' ? 'selected' : ''
-          }`}
-          onClick={() => handleColorClick('blue')}
-        ></div>
-        <div
-          className={`color-box brown ${
-            selectedColor === 'brown' ? 'selected' : ''
-          }`}
-          onClick={() => handleColorClick('brown')}
-        ></div>
-        <div
-          className={`color-box red ${
-            selectedColor === 'red' ? 'selected' : ''
-          }`}
-          onClick={() => handleColorClick('red')}
-        ></div>
-        <div
-          className={`color-box yellow ${
-            selectedColor === 'yellow' ? 'selected' : ''
-          }`}
-          onClick={() => handleColorClick('yellow')}
-        ></div>
-        <div
-          className={`color-box pink ${
-            selectedColor === 'pink' ? 'selected' : ''
-          }`}
-          onClick={() => handleColorClick('pink')}
-        ></div>
+        {colors.map((color) => (
+          <Box
+            key={color}
+            color={color}
+            selectedColor={selectedColor}
+            handleColorClick={handleColorClick}
+          />
+        ))}
       </div>
-       <div
-    className={`pencil ${
-        selectedTool === 'pencil' ? 'selected' : ''
-    }`}
-    onClick={() => handleToolClick('pencil')}
-></div>
-<div
-    className={`eraser ${
-        selectedTool === 'eraser' ? 'selected' : ''
-    }`}
-    onClick={() => handleToolClick('eraser')}
-></div>
-
-
     </div>
   );
 }
 
+function Box({ color, selectedColor, handleColorClick }) {
+  return (
+    <div
+      className={`color-box ${color} ${
+        selectedColor === color ? 'selected' : ''
+      }`}
+      onClick={() => handleColorClick(color)}
+    ></div>
+  );
+}
+
 export default ColorPalette;
+
