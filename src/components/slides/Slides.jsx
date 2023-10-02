@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from "react";
 import './slides.css';
 
 export default function Slides() {
@@ -7,32 +7,26 @@ export default function Slides() {
 
   useEffect(() => {
     showSlides(slideIndex);
-  }, [slideIndex]);
+  });
 
   const addWritingSlide = () => {
     if (!firstSlideAdded) {
-      // Creating writing board for the first slide
+      // Creating a writing board for the first slide
       createWritingBoard();
       setFirstSlideAdded(true);
     } else {
       setSlideIndex(slideIndex + 1);
-      const slideElement = document.createElement('div');
-      slideElement.textContent = `Writing Slide ${slideIndex}`;
-      slideElement.classList.add('writing-slide');
-      document.getElementById('slide-container').appendChild(slideElement);
+      const canvasElement = document.createElement('canvas');
+      canvasElement.classList.add('writing-slide');
+      document.getElementById('slide-container').appendChild(canvasElement);
     }
   };
 
   const createWritingBoard = () => {
     setSlideIndex(slideIndex + 1);
-    const slideElement = document.createElement('div');
-    slideElement.innerHTML = `
-        <div class="writing-board">
-            <textarea class="writing-area" placeholder="Start writing..."></textarea>
-        </div>
-    `;
-    slideElement.classList.add('writing-slide');
-    document.getElementById('slide-container').appendChild(slideElement);
+    const canvasElement = document.createElement('canvas');
+    canvasElement.classList.add('writing-slide');
+    document.getElementById('slide-container').appendChild(canvasElement);
   };
 
   const plusSlides = (n) => {
@@ -41,36 +35,86 @@ export default function Slides() {
 
   const showSlides = (index) => {
     const slides = document.getElementsByClassName('writing-slide');
-
+  
+    if (slides.length === 0) {
+      // No 'writing-slide' elements found, handle this case as needed
+      return;
+    }
+  
     if (index < 1) {
       setSlideIndex(1);
     } else if (index > slides.length) {
       setSlideIndex(slides.length);
     }
+  
     for (let i = 0; i < slides.length; i++) {
       slides[i].style.display = 'none';
     }
+  
     if (slides.length > 0) {
       slides[slideIndex - 1].style.display = 'block';
     }
   };
+  
 
   return (
     <>
-      <div className="container">
-        <a href="" className="prev" onClick={() => plusSlides(-1)}>
-          &#10094;
-        </a>
-        <button id="add-slide-button" type="button" className="btn btn-light" onClick={addWritingSlide}>
-          Add Writing Slide
-        </button>
-        <a className="next" onClick={() => plusSlides(1)}>
-          &#10095;
-        </a>
-      </div>
-      <br />
-      <div className="main-container">
-        <div id="slide-container" className="slide-container"></div>
+      <div>
+        <div className="container">
+          <nav className="navbar fixed-top navbar-expand-sm bg-light">
+            <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" className="navbar-toggler" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item active">
+                  <a href="#" className="nav-link active">
+                    Home
+                  </a>
+                </li>
+                {/* Add New Slide Dropdown */}
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Add New Slide
+                  </a>
+                  {/* Dropdown Menu */}
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {/* Content inside the dropdown */}
+                    <li className="dropdown-item">
+                      {/* Navigation controls for slides */}
+                      <span className="d-flex">
+                        <button className="prev btn btn-outline-dark" onClick={() => plusSlides(-1)}>
+                          &#10094;
+                        </button>
+                        <button
+                          id="add-slide-button"
+                          type="button"
+                          className="btn btn-light"
+                          onClick={addWritingSlide}
+                        >
+                          New Slide
+                        </button>
+                        <button className="next btn btn-outline-dark" onClick={() => plusSlides(1)}>
+                          &#10095;
+                        </button>
+                      </span>
+                    </li>
+                  </ul>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link">
+                    Profile
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <br />
+        <div className="main-container">
+          <canvas id="slide-container">
+          </canvas>
+        </div>
       </div>
     </>
   );
