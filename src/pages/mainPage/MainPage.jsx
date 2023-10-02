@@ -1,10 +1,12 @@
 import React from 'react'
-import Slides from '../../Component/slides/Slides'
+import Slides from '../../components/slides/Slides'
+import ColorPalette from '../../components/Palette/ColorPalette'
 
 export default function MainPage() {
   return (
     <>
        <Slides/>
+       <ColorPalette/>
     </>
   )
 }
