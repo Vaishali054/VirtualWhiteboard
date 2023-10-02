@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import './ColorPalette.css'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faEraser } from '@fortawesome/free-solid-svg-icons';
 
 function ColorPalette() {
-  const [selectedColor, setSelectedColor] = useState(null);
   const [selectedTool, setSelectedTool] = useState(null);
  const colors = ['black', 'blue', 'brown', 'red', 'pink', 'yellow'];
+
+
+
   const handleColorClick = (color) => {
     setSelectedColor(color);
-  };
-
-  const handleToolClick = (tool) => {
-    setSelectedTool(tool);
   };
 
   return (
@@ -25,6 +25,12 @@ function ColorPalette() {
           />
         ))}
       </div>
+
+
+       <div className="pencil"><FontAwesomeIcon icon={faPencil} size='xl' style={{color: "#000000",}} /></div>
+<div className="erarser"><FontAwesomeIcon icon={faEraser} size='xl' style={{ color: "#000000" }} />
+</div>
+
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import React, { useState, useEffect} from "react";
 import './slides.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser} from '@fortawesome/free-solid-svg-icons';
+
 
 export default function Slides() {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -55,8 +58,6 @@ export default function Slides() {
       slides[slideIndex - 1].style.display = 'block';
     }
   };
-  
-
   return (
     <>
       <div>
@@ -65,13 +66,11 @@ export default function Slides() {
             <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" className="navbar-toggler" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item active">
-                  <div href="#" className="nav-link active">
+            <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <div className="nav-link active">
                     Home
                   </div>
-                </li>
+                <ul className="navbar-nav">
                 {/* Add New Slide Dropdown */}
                 <li className="nav-item dropdown">
                   <div className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -103,7 +102,7 @@ export default function Slides() {
                 </li>
                 <li className="nav-item">
                   <div className="nav-link">
-                    Profile
+                  <FontAwesomeIcon icon={faUser} size="xl" style={{ color: "#000000" }} />
                   </div>
                 </li>
               </ul>
