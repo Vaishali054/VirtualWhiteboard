@@ -1,0 +1,66 @@
+/* Style for the writing slides */
+@media screen and (max-width: 768px) {
+    canvas{
+        width: 80% ;
+        height: auto;
+    }    
+  }
+  @media screen and (min-width: 769px) {
+    canvas{
+    width: 70%;
+    height: auto;
+    }
+  }
+  body{
+    margin-top: 20px;
+    margin-left: 0;
+  }
+  .writing-slide {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 100px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    padding: 5px;
+  }
+  
+  #add-slide-button {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin: 10px;
+  }
+  
+  .prev {
+    cursor: pointer;
+  }
+  
+  .next {
+    cursor: pointer;
+  }
+  
+  .container {
+    /* justify-content: left;
+    align-items: left;
+    display: flex; */
+    margin: 0;
+    padding: 5px;
+    
+  }
+  
+  .main-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    margin-top: 0px;
+  }
+  canvas{
+    border: 2px solid #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  .slide-container{
+    margin-top: 5px;
+  }
+  
+  
