@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./toolkit.css";
 import {
   faDownload,
-  faEllipsis,
   faMagnifyingGlassMinus,
   faMagnifyingGlassPlus,
   faNoteSticky,
@@ -29,28 +28,27 @@ export default function Toolkit() {
         </div>
         <div className="tools shadow">
           <div className="pens">
-            <FontAwesomeIcon icon={faPen} size="2x" />
+            <FontAwesomeIcon icon={faPen} size="lg" />
           </div>
           <div className="stickynotes">
             <FontAwesomeIcon
               icon={faNoteSticky}
               style={{ color: "#c4d56c" }}
-              size="2x"
+              size="lg"
             />
           </div>
           <div className="text">
-            <FontAwesomeIcon icon={faT} size="2x" />
+            <FontAwesomeIcon className ="custom.icon" icon={faT} size="lg" />
           </div>
           <div className="shapes">
-            <FontAwesomeIcon icon={faShapes} size="2x" />
+            <FontAwesomeIcon className ="custom.icon" icon={faShapes} size="lg" />
           </div>
-          <div className="more">
-            <FontAwesomeIcon icon={faEllipsis} size="2x" />
+          <div className="download">
+            <FontAwesomeIcon icon={faDownload} className="custom.icon" size="lg"/>
           </div>
         </div>
-        <div className=" button download shadow">
-          Download
-          <FontAwesomeIcon icon={faDownload} />
+        <div className=" button clear shadow" >
+          clear
         </div>
       </div>
     </div>
