@@ -31,14 +31,17 @@
     
     
 }
-.download{
+.clear {
     padding: 7px 10px;
     border-radius: 5px;
     height: 40px;
     display: flex;
+    align-items: center; 
+    justify-content: center; 
     min-width: 120px;
-    justify-content: space-between;
-}
+    text-align: center; 
+  }
+  
 
 .tools{
     display: flex;
@@ -46,4 +49,7 @@
     justify-content: space-between;
     padding: 10px 40px;
     border-radius: 20px;
+}
+.custom.icon{
+    color: #030201;
 }
