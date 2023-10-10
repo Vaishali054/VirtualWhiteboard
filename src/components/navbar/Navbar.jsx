@@ -48,7 +48,7 @@ import {
 
         <div className="container2">
 
-          <div className="button">
+          <div className="button" onClick={handleShareClick}>
             <FontAwesomeIcon icon={faShare} style={{ color: "#313539" }} />Share
 
           </div>
