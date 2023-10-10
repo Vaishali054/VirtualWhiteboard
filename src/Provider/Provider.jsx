@@ -8,6 +8,8 @@ export const useWhiteboard = () => {
 
 export const WhiteboardProvider = ({ children }) => {
   const [clearScreen, setClearScreen] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1); // Initialize with 100% zoom
+
 
   const clearWhiteboard = () => {
     setClearScreen(true);
@@ -16,9 +18,23 @@ export const WhiteboardProvider = ({ children }) => {
   const resetClearScreen = () => {
     setClearScreen(false);
   };
+  const zoomIn = () => {
+      if (zoomLevel < 2) { // Limit maximum zoom level to 200%
+        console.log("zoomIn")
+        setZoomLevel(zoomLevel + 0.1); // You can adjust the zoom increment as needed
+    }
+};
+
+const zoomOut = () => {
+    if (zoomLevel > 0.5) { // Limit minimum zoom level to 50%
+        console.log("zoomOut")
+      setZoomLevel(zoomLevel - 0.1); // You can adjust the zoom decrement as needed
+    }
+  };
+  
 
   return (
-    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen }}>
+    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut }}>
       {children}
     </WhiteboardContext.Provider>
   );

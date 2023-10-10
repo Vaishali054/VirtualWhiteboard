@@ -14,7 +14,7 @@ import { useWhiteboard } from "../../Provider/Provider";
 
 
 export default function Toolkit() {
-  const { clearWhiteboard } = useWhiteboard();
+  const { clearWhiteboard ,zoomIn,zoomOut} = useWhiteboard();
   const handleClearScreen = () => {
     clearWhiteboard(); 
   };
@@ -24,11 +24,11 @@ export default function Toolkit() {
       <div className="toolkit" id="toolkit">
         <div className="shift-down">
           <div className="zoom shadow button">
-            <div className="plus" >
+            <div className="plus" onClick={zoomIn}>
               <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
             </div>
             <div className="percent">  100%</div>
-            <div className="minus" >
+            <div className="minus" onClick={zoomOut}>
               <FontAwesomeIcon icon={faMagnifyingGlassMinus} />
             </div>
           </div>

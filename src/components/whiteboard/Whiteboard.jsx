@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useWhiteboard } from "../../Provider/Provider";
 
 export default function Whiteboard() {
-  const {clearScreen,resetClearScreen}=useWhiteboard()
+  const {clearScreen,resetClearScreen,zoomLevel}=useWhiteboard()
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -27,6 +27,8 @@ export default function Whiteboard() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+ 
 
   useEffect(() => {
     if (clearScreen) {
@@ -78,6 +80,7 @@ export default function Whiteboard() {
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
+        
         style={{ touchAction: "none", width: "100vw", height: "85vh" }}
       />
     </div>
