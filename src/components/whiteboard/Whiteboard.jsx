@@ -35,8 +35,6 @@ export default function Whiteboard() {
 
     // Apply the zoom level to the context
     context.setTransform(zoomLevel, 0, 0, zoomLevel, 0, 0);
-
-    // ... Rest of your code for canvas setup and drawing
   }, [canvasSize, zoomLevel]);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ export default function Whiteboard() {
   }, [canvasSize]);
 
   const startDrawing = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const { offsetX, offsetY } = event.nativeEvent;
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
@@ -64,7 +62,7 @@ export default function Whiteboard() {
   };
 
   const draw = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (!isDrawing) return;
 
     const { offsetX, offsetY } = event.nativeEvent;
@@ -80,6 +78,32 @@ export default function Whiteboard() {
     }
   };
 
+  const handleTouchStart = (event) => {
+    if (event.touches.length === 1) {
+      // Prevent scrolling on touch devices
+      // event.preventDefault();
+      const touch = event.touches[0];
+      const { pageX, pageY } = touch;
+      startDrawing({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
+    }
+  };
+  
+  const handleTouchMove = (event) => {
+    if (event.touches.length === 1) {
+      // Prevent scrolling on touch devices
+      // event.preventDefault();
+      const touch = event.touches[0];
+      const { pageX, pageY } = touch;
+      draw({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
+    }
+  };
+  
+  const handleTouchEnd = (event) => {
+    if (event.touches.length === 0) {
+      stopDrawing();
+    }
+  };
+
   return (
     <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100%" }}>
       <canvas
@@ -88,9 +112,9 @@ export default function Whiteboard() {
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
-        onTouchStart={startDrawing}
-        onTouchMove={draw}
-        onTouchEnd={stopDrawing}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         style={{ touchAction: "none", width: "100vw", height: "85vh" }}
       />
       <input
