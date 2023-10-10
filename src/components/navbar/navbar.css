@@ -37,3 +37,6 @@ nav{
     margin: 15px 30px ;
     display: flex;
 }
+.container2 .button .fa-share {
+    margin-right: 10px; 
+  }
