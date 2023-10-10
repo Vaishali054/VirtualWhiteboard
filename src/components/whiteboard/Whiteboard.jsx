@@ -56,7 +56,7 @@ export default function Whiteboard() {
 
   const startDrawing = (event) => {
     event.preventDefault();
-    const { offsetX, offsetY } = event.nativeEvent;
+    const { offsetX, offsetY } = event.touches[0];
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     setIsDrawing(true);
@@ -66,7 +66,7 @@ export default function Whiteboard() {
     event.preventDefault();
     if (!isDrawing) return;
 
-    const { offsetX, offsetY } = event.nativeEvent;
+    const { offsetX, offsetY } = event.touches[0];
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
   };
@@ -89,6 +89,7 @@ export default function Whiteboard() {
         onTouchStart={startDrawing}
         onTouchMove={draw}
         onTouchEnd={stopDrawing}
+        onTouchCancel={stopDrawing}
         style={{ touchAction: "none", width: "100vw", height: "85vh" }}
       />
     </div>
