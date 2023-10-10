@@ -1,79 +1,42 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useWhiteboard } from "../../Provider/Provider";
-
-export default function Whiteboard() {
-  const { clearScreen, resetClearScreen, zoomLevel } = useWhiteboard();
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import "./whiteboard.css"
+function Canvas() {
   const canvasRef = useRef(null);
-  const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState('black');
-  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    contextRef.current = context;
-
-    // Set initial canvas size based on the container size
-    const container = canvas.parentElement;
-    setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
-
-    // Update canvas size when the window is resized
-    const handleResize = () => {
-      setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    // Set the canvas size to 85vh and 100vw
+    canvasRef.current.width = window.innerWidth;
+    canvasRef.current.height = window.innerHeight;
   }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-
-    // Apply the zoom level to the context
-    context.setTransform(zoomLevel, 0, 0, zoomLevel, 0, 0);
-  }, [canvasSize, zoomLevel]);
-
-  useEffect(() => {
-    if (clearScreen) {
-      const canvas = canvasRef.current;
-      const context = canvas.getContext("2d");
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      resetClearScreen();
-    }
-  }, [clearScreen]);
-
-  useEffect(() => {
-    // Update canvas size when canvasSize changes
-    const canvas = canvasRef.current;
-    canvas.width = canvasSize.width;
-    canvas.height = canvasSize.height;
-  }, [canvasSize]);
 
   const startDrawing = (event) => {
     // event.preventDefault();
     const { offsetX, offsetY } = event.nativeEvent;
-    contextRef.current.beginPath();
-    contextRef.current.moveTo(offsetX, offsetY);
+    const context = canvasRef.current.getContext("2d");
+    context.beginPath();
+    context.moveTo(offsetX, offsetY);
     setIsDrawing(true);
   };
 
   const draw = (event) => {
     // event.preventDefault();
     if (!isDrawing) return;
-
     const { offsetX, offsetY } = event.nativeEvent;
-    contextRef.current.lineTo(offsetX, offsetY);
-    contextRef.current.strokeStyle = color;
-    contextRef.current.stroke();
+    const context = canvasRef.current.getContext("2d");
+    context.lineTo(offsetX, offsetY);
+    context.strokeStyle = color;
+    context.stroke();
   };
 
   const stopDrawing = () => {
     if (isDrawing) {
-      contextRef.current.closePath();
+      const context = canvasRef.current.getContext("2d");
+      context.closePath();
       setIsDrawing(false);
     }
   };
@@ -105,23 +68,61 @@ export default function Whiteboard() {
   };
 
   return (
-    <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100%" }}>
-      <canvas
-        ref={canvasRef}
-        onMouseDown={startDrawing}
-        onMouseMove={draw}
-        onMouseUp={stopDrawing}
-        onMouseLeave={stopDrawing}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        style={{ touchAction: "none", width: "100vw", height: "85vh" }}
-      />
-      <input
-        type="color"
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
-      />
+    <canvas
+      ref={canvasRef}
+      onMouseDown={startDrawing}
+      onMouseMove={draw}
+      onMouseUp={stopDrawing}
+      onMouseLeave={stopDrawing}
+      onTouchStart={startDrawing}
+      onTouchMove={draw}
+      onTouchEnd={stopDrawing}
+      style={{ touchAction: "none", width: "100%", height: "100%" }}
+    />
+  );
+}
+
+export default function Whiteboard() {
+  const { clearScreen, resetClearScreen, zoomLevel } = useWhiteboard();
+  const [canvases, setCanvases] = useState([]);
+
+  useEffect(() => {
+    canvases.forEach((canvasRef) => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const context = canvas.getContext("2d");
+        context.setTransform(zoomLevel, 0, 0, zoomLevel, 0, 0);
+        // ... Rest of your code for canvas setup and drawing
+      }
+    });
+  }, [canvases, zoomLevel]);
+
+  useEffect(() => {
+    if (clearScreen) {
+      canvases.forEach((canvasRef) => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+          const context = canvas.getContext("2d");
+          context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      });
+      resetClearScreen();
+    }
+  }, [clearScreen, canvases, resetClearScreen]);
+
+  const addNewCanvas = () => {
+    setCanvases([...canvases, <Canvas key={canvases.length} />]);
+  };
+
+  return (
+    <div>
+      <div className="slide shadow button translate" onClick={addNewCanvas}> 
+          <FontAwesomeIcon icon={faPlus} className="faPlus" />
+          </div>
+      <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100vh" }}>
+        {canvases}
+      </div>
+      {/* <input type="color" value={color} onChange={(e) => setColor(e.target.value)} /> */}
     </div>
   );
 }
