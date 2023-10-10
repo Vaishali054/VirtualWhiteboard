@@ -49,8 +49,10 @@ export default function Toolkit() {
             <FontAwesomeIcon icon={faDownload} className="custom.icon" size="2x" style={{ color: "#313539" }}  />
           </div>
         </div>
+
         <div className=" button clear shadow">
           clear
+
         </div>
       </div>
     </div>
