@@ -14,8 +14,8 @@ export default function MainPage() {
       <Navbar/>
       <WhiteboardProvider>
 
-      <Whiteboard/>
       <Toolkit/>
+      <Whiteboard/>
       </WhiteboardProvider>
     </>
   )
