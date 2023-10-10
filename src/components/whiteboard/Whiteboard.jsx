@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useWhiteboard } from "../../Provider/Provider";
 
 export default function Whiteboard() {
-  const {clearScreen,resetClearScreen,zoomLevel}=useWhiteboard()
+  const { clearScreen, resetClearScreen, zoomLevel } = useWhiteboard();
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -31,10 +31,10 @@ export default function Whiteboard() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-  
+
     // Apply the zoom level to the context
     context.setTransform(zoomLevel, 0, 0, zoomLevel, 0, 0);
-  
+
     // ... Rest of your code for canvas setup and drawing
   }, [canvasSize, zoomLevel]);
 
@@ -43,7 +43,7 @@ export default function Whiteboard() {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       context.clearRect(0, 0, canvas.width, canvas.height);
-      resetClearScreen()
+      resetClearScreen();
     }
   }, [clearScreen]);
 
@@ -56,12 +56,10 @@ export default function Whiteboard() {
 
   const startDrawing = (event) => {
     event.preventDefault();
-    if (!isDrawing) {
-      const { offsetX, offsetY } = event.nativeEvent;
-      contextRef.current.beginPath();
-      contextRef.current.moveTo(offsetX, offsetY);
-      setIsDrawing(true);
-    }
+    const { offsetX, offsetY } = event.nativeEvent;
+    contextRef.current.beginPath();
+    contextRef.current.moveTo(offsetX, offsetY);
+    setIsDrawing(true);
   };
 
   const draw = (event) => {
@@ -88,6 +86,9 @@ export default function Whiteboard() {
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
+        onTouchStart={startDrawing}
+        onTouchMove={draw}
+        onTouchEnd={stopDrawing}
         style={{ touchAction: "none", width: "100vw", height: "85vh" }}
       />
     </div>
