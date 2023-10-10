@@ -6,6 +6,7 @@ export default function Whiteboard() {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
+  const [color, setColor] = useState('black');
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function Whiteboard() {
 
     const { offsetX, offsetY } = event.nativeEvent;
     contextRef.current.lineTo(offsetX, offsetY);
+    contextRef.current.strokeStyle = color;
     contextRef.current.stroke();
   };
 
@@ -90,6 +92,11 @@ export default function Whiteboard() {
         onTouchMove={draw}
         onTouchEnd={stopDrawing}
         style={{ touchAction: "none", width: "100vw", height: "85vh" }}
+      />
+      <input
+        type="color"
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
       />
     </div>
   );
