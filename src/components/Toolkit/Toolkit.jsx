@@ -4,8 +4,6 @@ import "./toolkit.css";
 import {
   faDownload,
   faEraser,
-  faMagnifyingGlassMinus,
-  faMagnifyingGlassPlus,
   faNoteSticky,
   faPen,
   faShapes,
@@ -89,12 +87,8 @@ export default function Toolkit() {
         filename: "page.pdf",
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: {
-          unit: "mm",
-          format: "a3",
-          orientation: "landscape",
-          pagesplit: true,
-        },
+
+        jsPDF: { unit: "mm", format: "a1", orientation: "landscape", pagesplit: true},
       };
 
       await html2pdf().from(content).set(pdfOptions).outputPdf().save();
@@ -111,7 +105,11 @@ export default function Toolkit() {
     <div className="container-bottom">
       <div className="toolkit">
         <div className="shift-down">
-          <div className="zoom shadow button">Add Slides</div>
+
+          <div className="slide shadow button">
+         
+          </div>
+
         </div>
         <div className="tools shadow">
           <div className="pens">
