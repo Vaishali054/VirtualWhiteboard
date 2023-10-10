@@ -1,50 +1,35 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useWhiteboard } from "../../Provider/Provider";
+import "./whiteboard.css";
 
 export default function Whiteboard() {
-  const {clearScreen,resetClearScreen,zoomLevel}=useWhiteboard()
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
+  
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    contextRef.current = context;
+    const canvasContainer = canvas.parentElement;
+    
+    // Function to update the canvas size based on the container's width
+    const updateCanvasSize = () => {
+      const containerWidth = canvasContainer.clientWidth;
+      const aspectRatio = 16 / 9; // Adjust the aspect ratio as needed
+      const maxHeight = Math.min(containerWidth / aspectRatio, window.innerHeight);
 
-    // Set initial canvas size based on the container size
-    const container = canvas.parentElement;
-    setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
-
-    // Update canvas size when the window is resized
-    const handleResize = () => {
-      setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
+      canvas.width = containerWidth;
+      canvas.height = maxHeight;
+      const context = canvas.getContext("2d");
+      contextRef.current = context;
     };
-    window.addEventListener("resize", handleResize);
+
+    window.addEventListener("resize", updateCanvasSize);
+    updateCanvasSize(); // Initial canvas size setup
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", updateCanvasSize);
     };
   }, []);
-
- 
-
-  useEffect(() => {
-    if (clearScreen) {
-      const canvas = canvasRef.current;
-      const context = canvas.getContext("2d");
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      resetClearScreen()
-    }
-  }, [clearScreen]);
-
-  useEffect(() => {
-    // Update canvas size when canvasSize changes
-    const canvas = canvasRef.current;
-    canvas.width = canvasSize.width;
-    canvas.height = canvasSize.height;
-  }, [canvasSize]);
 
   const startDrawing = (event) => {
     event.preventDefault();
@@ -71,18 +56,33 @@ export default function Whiteboard() {
       setIsDrawing(false);
     }
   };
+  const onClearCanvas = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
 
   return (
-    <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100%" }}>
+    <>
+    <div className="canvas-container">
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
-        
-        style={{ touchAction: "none", width: "100vw", height: "85vh" }}
+        onTouchStart={startDrawing}
+        onTouchMove={draw}
+        onTouchEnd={stopDrawing}
+        onTouchCancel={stopDrawing}
+        style={{ touchAction: "none" }}
       />
     </div>
+    <div>
+    {/* <div className=" button clear shadow" onClick={onClearCanvas}>
+          clear
+        </div> */}
+    </div>
+    </>
   );
 }
