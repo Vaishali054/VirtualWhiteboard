@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./toolkit.css";
 import {
   faDownload,
+  faEraser,
   faMagnifyingGlassMinus,
   faMagnifyingGlassPlus,
   faNoteSticky,
@@ -39,6 +40,9 @@ export default function Toolkit() {
         <div className="tools shadow">
           <div className="pens">
             <FontAwesomeIcon icon={faPen} size="2x" style={{ color: "#313539" }}  />
+          </div>
+          <div className="erarser">
+          <FontAwesomeIcon className ="custom.icon" icon={faEraser} size="2x" style={{ color: "#313539" }} />
           </div>
           <div className="stickynotes">
             <FontAwesomeIcon
