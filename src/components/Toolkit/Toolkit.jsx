@@ -24,7 +24,7 @@ export default function Toolkit() {
         filename: "page.pdf",
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        jsPDF: { unit: "mm", format: "a3", orientation: "landscape", pagesplit: true},
       };
 
       await html2pdf().from(content).set(pdfOptions).outputPdf().save();
@@ -32,7 +32,7 @@ export default function Toolkit() {
       console.error("Error converting to PDF:", error);
     }
   };
-  const { clearWhiteboard, zoomIn, zoomOut } = useWhiteboard();
+  const { clearWhiteboard,} = useWhiteboard();
   const handleClearScreen = () => {
     clearWhiteboard();
   };
@@ -42,13 +42,7 @@ export default function Toolkit() {
       <div className="toolkit">
         <div className="shift-down">
           <div className="zoom shadow button">
-            <div className="plus" onClick={zoomIn}>
-              <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
-            </div>
-            <div className="percent"> 100%</div>
-            <div className="minus" onClick={zoomOut}>
-              <FontAwesomeIcon icon={faMagnifyingGlassMinus} />
-            </div>
+            Add Slides
           </div>
         </div>
         <div className="tools shadow">
