@@ -10,21 +10,28 @@ import {
   faShapes,
   faT,
 } from "@fortawesome/free-solid-svg-icons";
+import { useWhiteboard } from "../../Provider/Provider";
+
 
 
 
 export default function Toolkit() {
+  const { clearWhiteboard ,zoomIn,zoomOut} = useWhiteboard();
+  const handleClearScreen = () => {
+    clearWhiteboard(); 
+  };
+
   
   return (
     <div className="container-bottom">
       <div className="toolkit">
         <div className="shift-down">
           <div className="zoom shadow button">
-            <div className="plus" >
+            <div className="plus"onClick={zoomIn} >
               <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
             </div>
-            <div className="percent">  100%</div>
-            <div className="minus" >
+            <div className="percent" >  100%</div>
+            <div className="minus" onClick={zoomOut}>
               <FontAwesomeIcon icon={faMagnifyingGlassMinus} />
             </div>
           </div>
@@ -50,7 +57,7 @@ export default function Toolkit() {
             <FontAwesomeIcon icon={faDownload} className="custom.icon" size="2x" style={{ color: "#313539" }}  />
           </div>
         </div>
-        <div className=" button clear shadow">
+        <div className=" button clear shadow" onClick={handleClearScreen}>
           clear
         </div>
       </div>

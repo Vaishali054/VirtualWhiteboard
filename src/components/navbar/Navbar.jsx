@@ -47,8 +47,10 @@ import {
         </div>
 
         <div className="container2">
+
           <div className="button" onClick={handleShareClick}>
-            <FontAwesomeIcon icon={faShare} />Share
+            <FontAwesomeIcon icon={faShare} style={{ color: "#313539" }} />Share
+
           </div>
           <div className="setting">
           <FontAwesomeIcon icon={faGear} style={{ color: "#313539" }} />
