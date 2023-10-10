@@ -15,7 +15,7 @@ function Canvas() {
   }, []);
 
   const startDrawing = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const { offsetX, offsetY } = event.nativeEvent;
     const context = canvasRef.current.getContext("2d");
     context.beginPath();
@@ -24,7 +24,7 @@ function Canvas() {
   };
 
   const draw = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (!isDrawing) return;
     const { offsetX, offsetY } = event.nativeEvent;
     const context = canvasRef.current.getContext("2d");
@@ -41,6 +41,32 @@ function Canvas() {
     }
   };
 
+  const handleTouchStart = (event) => {
+    if (event.touches.length === 1) {
+      // Prevent scrolling on touch devices
+      // event.preventDefault();
+      const touch = event.touches[0];
+      const { pageX, pageY } = touch;
+      startDrawing({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
+    }
+  };
+  
+  const handleTouchMove = (event) => {
+    if (event.touches.length === 1) {
+      // Prevent scrolling on touch devices
+      // event.preventDefault();
+      const touch = event.touches[0];
+      const { pageX, pageY } = touch;
+      draw({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
+    }
+  };
+  
+  const handleTouchEnd = (event) => {
+    if (event.touches.length === 0) {
+      stopDrawing();
+    }
+  };
+
   return (
     <canvas
       ref={canvasRef}
@@ -48,9 +74,9 @@ function Canvas() {
       onMouseMove={draw}
       onMouseUp={stopDrawing}
       onMouseLeave={stopDrawing}
-      onTouchStart={startDrawing}
-      onTouchMove={draw}
-      onTouchEnd={stopDrawing}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       style={{ touchAction: "none", width: "100%", height: "100%" }}
     />
   );
