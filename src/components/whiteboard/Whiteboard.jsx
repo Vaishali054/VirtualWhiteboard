@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
+import "./whiteboard.css";
 
 export default function Whiteboard() {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
+  
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -54,8 +56,14 @@ export default function Whiteboard() {
       setIsDrawing(false);
     }
   };
+  const onClearCanvas = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
 
   return (
+    <>
     <div className="canvas-container">
       <canvas
         ref={canvasRef}
@@ -63,8 +71,18 @@ export default function Whiteboard() {
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
+        onTouchStart={startDrawing}
+        onTouchMove={draw}
+        onTouchEnd={stopDrawing}
+        onTouchCancel={stopDrawing}
         style={{ touchAction: "none" }}
       />
     </div>
+    <div>
+    {/* <div className=" button clear shadow" onClick={onClearCanvas}>
+          clear
+        </div> */}
+    </div>
+    </>
   );
 }

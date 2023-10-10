@@ -37,21 +37,23 @@ import {
       <nav>
         <div className="container1">
           <div className="home">
-          <FontAwesomeIcon icon={faHouse} style={{color: "#18191b",}} size="1x" />
+          <FontAwesomeIcon icon={faHouse} style={{ color: "#313539" }}  size="1x" />
           </div>
           <div className="line">|</div>
           <div className="slideName">Untitled whiteboard</div>
           <div className="down">
-          <FontAwesomeIcon icon={faChevronDown} />
+          <FontAwesomeIcon icon={faChevronDown} style={{ color: "#313539" }} />
           </div>
         </div>
 
         <div className="container2">
-          <div className="button" onClick={handleShareClick}>
-            <FontAwesomeIcon icon={faShare} />Share
+
+          <div className="button">
+            <FontAwesomeIcon icon={faShare} style={{ color: "#313539" }} />Share
+
           </div>
           <div className="setting">
-          <FontAwesomeIcon icon={faGear} />
+          <FontAwesomeIcon icon={faGear} style={{ color: "#313539" }} />
           </div>
         </div>
       </nav>

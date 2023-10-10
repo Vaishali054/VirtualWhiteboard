@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 
+
 export default function Toolkit() {
   return (
     <div className="container-bottom">
@@ -29,26 +30,26 @@ export default function Toolkit() {
         </div>
         <div className="tools shadow">
           <div className="pens">
-            <FontAwesomeIcon icon={faPen} size="lg" />
+            <FontAwesomeIcon icon={faPen} size="2x" style={{ color: "#313539" }}  />
           </div>
           <div className="stickynotes">
             <FontAwesomeIcon
               icon={faNoteSticky}
-              style={{ color: "#c4d56c" }}
-              size="lg"
+              size="2x" 
+              style={{ color: "#fecd52" }}
             />
           </div>
           <div className="text">
-            <FontAwesomeIcon className ="custom.icon" icon={faT} size="lg" />
+            <FontAwesomeIcon className ="custom.icon" icon={faT} size="2x" style={{ color: "#313539" }} />
           </div>
           <div className="shapes">
-            <FontAwesomeIcon className ="custom.icon" icon={faShapes} size="lg" />
+            <FontAwesomeIcon className ="custom.icon" icon={faShapes} size="2x" style={{ color: "#313539" }} />
           </div>
           <div className="download">
-            <FontAwesomeIcon icon={faDownload} className="custom.icon" size="lg"/>
+            <FontAwesomeIcon icon={faDownload} className="custom.icon" size="2x" style={{ color: "#313539" }}  />
           </div>
         </div>
-        <div className=" button clear shadow" >
+        <div className=" button clear shadow">
           clear
         </div>
       </div>
