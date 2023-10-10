@@ -5,12 +5,18 @@ import Navbar from '../../components/navbar/Navbar'
 import Toolkit from '../../components/Toolkit/Toolkit'
 import Whiteboard from '../../components/whiteboard/Whiteboard'
 
+import { WhiteboardProvider } from '../../Provider/Provider'
+
 export default function MainPage() {
+  
   return (
     <>
       <Navbar/>
+      <WhiteboardProvider>
+
       <Whiteboard/>
       <Toolkit/>
+      </WhiteboardProvider>
     </>
   )
 }

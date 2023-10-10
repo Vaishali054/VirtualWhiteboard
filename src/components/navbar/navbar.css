@@ -30,6 +30,7 @@ nav{
     align-items: center;
     justify-content: center;
     margin: 0px 20px;
+    cursor: pointer;
 }
 .container2{
     justify-content: space-between;
