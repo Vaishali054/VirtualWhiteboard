@@ -4,8 +4,7 @@ import "./toolkit.css";
 import {
   faDownload,
   faEraser,
-  faMagnifyingGlassMinus,
-  faMagnifyingGlassPlus,
+  faPlus,
   faNoteSticky,
   faPen,
   faShapes,
@@ -42,8 +41,8 @@ export default function Toolkit() {
     <div className="container-bottom">
       <div className="toolkit">
         <div className="shift-down">
-          <div className="zoom shadow button">
-            Add Slides
+          <div className="slide shadow button">
+          <FontAwesomeIcon icon={faPlus} />
           </div>
         </div>
         <div className="tools shadow">
