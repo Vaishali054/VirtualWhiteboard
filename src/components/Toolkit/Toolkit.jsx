@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useWhiteboard } from "../../Provider/Provider";
 
+
 export default function Toolkit() {
   const { clearWhiteboard } = useWhiteboard();
   const handleClearScreen = () => {
@@ -23,11 +24,11 @@ export default function Toolkit() {
       <div className="toolkit" id="toolkit">
         <div className="shift-down">
           <div className="zoom shadow button">
-            <div className="plus">
+            <div className="plus" >
               <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
             </div>
-            <div className="percent"> 100%</div>
-            <div className="minus">
+            <div className="percent">  100%</div>
+            <div className="minus" >
               <FontAwesomeIcon icon={faMagnifyingGlassMinus} />
             </div>
           </div>
