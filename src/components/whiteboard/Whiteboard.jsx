@@ -1,35 +1,58 @@
 import React, { useRef, useEffect, useState } from "react";
-import "./whiteboard.css";
+import { useWhiteboard } from "../../Provider/Provider";
 
 export default function Whiteboard() {
+  const {clearScreen,resetClearScreen,zoomLevel}=useWhiteboard()
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const canvasContainer = canvas.parentElement;
-    
-    // Function to update the canvas size based on the container's width
-    const updateCanvasSize = () => {
-      const containerWidth = canvasContainer.clientWidth;
-      const aspectRatio = 16 / 9; // Adjust the aspect ratio as needed
-      const maxHeight = Math.min(containerWidth / aspectRatio, window.innerHeight);
+    const context = canvas.getContext("2d");
+    contextRef.current = context;
 
-      canvas.width = containerWidth;
-      canvas.height = maxHeight;
-      const context = canvas.getContext("2d");
-      contextRef.current = context;
+    // Set initial canvas size based on the container size
+    const container = canvas.parentElement;
+    setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
+
+    // Update canvas size when the window is resized
+    const handleResize = () => {
+      setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
     };
-
-    window.addEventListener("resize", updateCanvasSize);
-    updateCanvasSize(); // Initial canvas size setup
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", updateCanvasSize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+  
+    // Apply the zoom level to the context
+    context.setTransform(zoomLevel, 0, 0, zoomLevel, 0, 0);
+  
+    // ... Rest of your code for canvas setup and drawing
+  }, [canvasSize, zoomLevel]);
+
+  useEffect(() => {
+    if (clearScreen) {
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      resetClearScreen()
+    }
+  }, [clearScreen]);
+
+  useEffect(() => {
+    // Update canvas size when canvasSize changes
+    const canvas = canvasRef.current;
+    canvas.width = canvasSize.width;
+    canvas.height = canvasSize.height;
+  }, [canvasSize]);
 
   const startDrawing = (event) => {
     event.preventDefault();
@@ -56,33 +79,17 @@ export default function Whiteboard() {
       setIsDrawing(false);
     }
   };
-  const onClearCanvas = () => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  };
 
   return (
-    <>
-    <div className="canvas-container">
+    <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100%" }}>
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
-        onTouchStart={startDrawing}
-        onTouchMove={draw}
-        onTouchEnd={stopDrawing}
-        onTouchCancel={stopDrawing}
-        style={{ touchAction: "none" }}
+        style={{ touchAction: "none", width: "100vw", height: "85vh" }}
       />
     </div>
-    <div>
-    {/* <div className=" button clear shadow" onClick={onClearCanvas}>
-          clear
-        </div> */}
-    </div>
-    </>
   );
 }

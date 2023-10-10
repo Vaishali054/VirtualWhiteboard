@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./toolkit.css";
 import {
@@ -12,6 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useWhiteboard } from "../../Provider/Provider";
 import html2pdf from "html2pdf.js";
+
+
 
 
 export default function Toolkit() {
@@ -38,16 +40,17 @@ export default function Toolkit() {
   const handleClearScreen = () => {
     clearWhiteboard(); 
   };
- 
+
+  
   return (
-    <div className="container-bottom" >
-      <div className="toolkit" id="toolkit">
+    <div className="container-bottom">
+      <div className="toolkit">
         <div className="shift-down">
           <div className="zoom shadow button">
-            <div className="plus" onClick={zoomIn}>
+            <div className="plus"onClick={zoomIn} >
               <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
             </div>
-            <div className="percent">  100%</div>
+            <div className="percent" >  100%</div>
             <div className="minus" onClick={zoomOut}>
               <FontAwesomeIcon icon={faMagnifyingGlassMinus} />
             </div>
@@ -55,26 +58,26 @@ export default function Toolkit() {
         </div>
         <div className="tools shadow">
           <div className="pens">
-            <FontAwesomeIcon icon={faPen} size="lg" />
+            <FontAwesomeIcon icon={faPen} size="2x" style={{ color: "#313539" }}  />
           </div>
           <div className="stickynotes">
             <FontAwesomeIcon
               icon={faNoteSticky}
-              style={{ color: "#c4d56c" }}
-              size="lg"
+              size="2x" 
+              style={{ color: "#fecd52" }}
             />
           </div>
           <div className="text">
-            <FontAwesomeIcon className ="custom.icon" icon={faT} size="lg" />
+            <FontAwesomeIcon className ="custom.icon" icon={faT} size="2x" style={{ color: "#313539" }} />
           </div>
           <div className="shapes">
-            <FontAwesomeIcon className ="custom.icon" icon={faShapes} size="lg" />
+            <FontAwesomeIcon className ="custom.icon" icon={faShapes} size="2x" style={{ color: "#313539" }} />
           </div>
           <div className="download" onClick={handleDownloadClick}>
-            <FontAwesomeIcon icon={faDownload} className="custom.icon" size="lg"/>
+            <FontAwesomeIcon icon={faDownload} className="custom.icon" size="2x" style={{ color: "#313539" }}  />
           </div>
         </div>
-        <div className=" button clear shadow" onClick={handleClearScreen} >
+        <div className=" button clear shadow" onClick={handleClearScreen}>
           clear
         </div>
       </div>
