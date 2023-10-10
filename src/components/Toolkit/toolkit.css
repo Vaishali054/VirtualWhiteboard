@@ -1,0 +1,49 @@
+.toolkit{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 30px;
+    
+}
+.container-bottom{
+    position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+ ; 
+}
+.shadow{
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.zoom{
+    display: flex;
+    min-width: 100px;
+    justify-content: space-between;
+ 
+    padding: 7px 10px;
+    border-radius: 5px;
+    height: 40px;
+    
+    
+}
+.download{
+    padding: 7px 10px;
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
+    min-width: 120px;
+    justify-content: space-between;
+}
+
+.tools{
+    display: flex;
+    width: 450px;
+    justify-content: space-between;
+    padding: 10px 40px;
+    border-radius: 20px;
+}
