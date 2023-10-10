@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,7 +8,30 @@ import {
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Navbar() {
+  export default function Navbar() {
+  const [shareLink, setShareLink] = useState(null);
+
+  const generateShareLink = () => {
+    // Generate the current URL to share
+    const currentURL = window.location.href;
+    setShareLink(currentURL);
+  };
+
+  const handleShareClick = async () => {
+    if (!shareLink) {
+      // generate share link if not already generated
+      generateShareLink();
+    }
+
+    if (shareLink) {
+      try {
+        await navigator.clipboard.writeText(shareLink);
+        alert("Link copied to clipboard!");
+      } catch (error) {
+        console.error("Error copying link to clipboard:", error);
+      }
+    }
+  };
   return (
     <>
       <nav>
@@ -24,7 +47,7 @@ export default function Navbar() {
         </div>
 
         <div className="container2">
-          <div className="button">
+          <div className="button" onClick={handleShareClick}>
             <FontAwesomeIcon icon={faShare} />Share
           </div>
           <div className="setting">

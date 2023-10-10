@@ -12,17 +12,18 @@ import {
   faT,
 } from "@fortawesome/free-solid-svg-icons";
 
+
 export default function Toolkit() {
   return (
     <div className="container-bottom">
       <div className="toolkit">
         <div className="shift-down">
           <div className="zoom shadow button">
-            <div className="plus">
+            <div className="plus" >
               <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
             </div>
-            <div className="percent"> 100%</div>
-            <div className="minus">
+            <div className="percent">  100%</div>
+            <div className="minus" >
               <FontAwesomeIcon icon={faMagnifyingGlassMinus} />
             </div>
           </div>
@@ -48,7 +49,7 @@ export default function Toolkit() {
             <FontAwesomeIcon icon={faEllipsis} size="2x" />
           </div>
         </div>
-        <div className=" button download shadow">
+        <div className=" button download shadow" >
           Download
           <FontAwesomeIcon icon={faDownload} />
         </div>
