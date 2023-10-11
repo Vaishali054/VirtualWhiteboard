@@ -9,6 +9,8 @@ export const useWhiteboard = () => {
 export const WhiteboardProvider = ({ children }) => {
   const [clearScreen, setClearScreen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1); // Initialize with 100% zoom
+  const [canvases, setCanvases] = useState([]);
+
 
 
   const clearWhiteboard = () => {
@@ -34,8 +36,9 @@ const zoomOut = () => {
   
 
   return (
-    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut }}>
+    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut,canvases,setCanvases }}>
       {children}
     </WhiteboardContext.Provider>
   );
 };
+
