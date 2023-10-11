@@ -10,7 +10,8 @@ export const WhiteboardProvider = ({ children }) => {
   const [clearScreen, setClearScreen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1); // Initialize with 100% zoom
   const [canvases, setCanvases] = useState([]);
-
+  //pen color functionality
+  const [color, setColor] = useState("#000000"); //default color
 
 
   const clearWhiteboard = () => {
@@ -36,8 +37,14 @@ const zoomOut = () => {
   
 
   return (
-    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut,canvases,setCanvases }}>
+    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut,canvases,setCanvases, color, setColor}}>
       {children}
+      <div>
+        <input 
+          type="color"
+          value={color}
+          onChange={(e)=>setColor(e.target.value)}/>
+      </div>
     </WhiteboardContext.Provider>
   );
 };
