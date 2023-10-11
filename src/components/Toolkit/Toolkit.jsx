@@ -101,13 +101,36 @@ export default function Toolkit() {
     clearWhiteboard();
   };
 
+   //pen tool
+   const [isColorPickerVisible, setColorPickerVisible] = useState(false);
+   const [penColor, setPenColor] = useState("black");
+   
+   const toggleColorPicker=()=>{
+    setColorPickerVisible(!isColorPickerVisible);
+   };
+   const handleColorSelection = (selectedColor) =>{
+    setPenColor(selectedColor);
+    setColorPickerVisible(false);
+   }
+   const penColorChoices = [
+    "lightgreen",
+    "black",
+    "orange", 
+    "blue", 
+    "lightpink",
+    "green",
+    "yellow",
+    "lightblue",
+    "lavender",
+  ];
+
   return (
     <div className="container-bottom">
       <div className="toolkit">
         <div className="shift-down">
 
           <div className="slide shadow button">
-         
+         {/* download */}
           </div>
 
         </div>
@@ -117,7 +140,21 @@ export default function Toolkit() {
               icon={faPen}
               size="lg"
               style={{ color: "#313539" }}
+              onClick={toggleColorPicker}
             />
+            
+            {isColorPickerVisible && (
+    <div className="color-palette-dropdown">
+      <div className="color-palette ">
+        {penColorChoices.map((color) => (
+          <div
+            key={color}
+            className="color-option"
+            style={{ backgroundColor: color }}
+            onClick={() => handleColorSelection(color)}
+          ></div>
+        ))}</div></div>)}
+
           </div>
           <div className="erarser">
             <FontAwesomeIcon
