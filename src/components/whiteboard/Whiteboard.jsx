@@ -2,11 +2,11 @@ import React, { useRef, useEffect, useState } from "react";
 import { useWhiteboard } from "../../Provider/Provider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import "./whiteboard.css"
+import "./whiteboard.css";
 function Canvas() {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [color, setColor] = useState('black');
+  const [color, setColor] = useState("black");
 
   useEffect(() => {
     // Set the canvas size to 85vh and 100vw
@@ -50,7 +50,7 @@ function Canvas() {
       startDrawing({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
     }
   };
-  
+
   const handleTouchMove = (event) => {
     if (event.touches.length === 1) {
       // Prevent scrolling on touch devices
@@ -60,7 +60,7 @@ function Canvas() {
       draw({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
     }
   };
-  
+
   const handleTouchEnd = (event) => {
     if (event.touches.length === 0) {
       stopDrawing();
@@ -84,8 +84,8 @@ function Canvas() {
 
 export default function Whiteboard() {
   const { clearScreen, resetClearScreen, zoomLevel } = useWhiteboard();
-  const [canvases, setCanvases] = useState([]);
-
+  //  const [canvases, setCanvases] = useState([]);
+  const canvases = [<Canvas key={1} />];
   useEffect(() => {
     canvases.forEach((canvasRef) => {
       const canvas = canvasRef.current;
@@ -98,7 +98,9 @@ export default function Whiteboard() {
   }, [canvases, zoomLevel]);
 
   useEffect(() => {
+    console.log("clearScreen is", clearScreen);
     if (clearScreen) {
+      console.log("Clearing canvases...");
       canvases.forEach((canvasRef) => {
         const canvas = canvasRef.current;
         if (canvas) {
@@ -110,16 +112,19 @@ export default function Whiteboard() {
     }
   }, [clearScreen, canvases, resetClearScreen]);
 
-  const addNewCanvas = () => {
-    setCanvases([...canvases, <Canvas key={canvases.length} />]);
-  };
+  //const addNewCanvas = () => {
+  //   setCanvases([...canvases, <Canvas key={canvases.length} />]);
+  // };
 
   return (
     <div>
-      <div className="slide shadow button translate" onClick={addNewCanvas}> 
-          <FontAwesomeIcon icon={faPlus} className="faPlus" />
-          </div>
-      <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100vh" }}>
+      <div className="slide shadow button translate" onClick={addNewCanvas}>
+        <FontAwesomeIcon icon={faPlus} className="faPlus" />
+      </div>
+      <div
+        className="canvas-container"
+        style={{ position: "relative", width: "100%", height: "100vh" }}
+      >
         {canvases}
       </div>
       {/* <input type="color" value={color} onChange={(e) => setColor(e.target.value)} /> */}

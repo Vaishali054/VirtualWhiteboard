@@ -70,14 +70,6 @@ export default function Toolkit() {
   const handleDeleteStickyNote = () => {
     setShowStickyNote(false);
   };
-  //Eraser functionality
-  const handleEraserClick = () => {
-    setIsErasing(!isErasing);
-    setIsDrawing(false);
-    setShowStickyNote(false);
-    setShowText(false);
-    setShowColorChoices(false);
-  };
 
   // download page functionality
   const handleDownloadClick = async () => {
@@ -122,7 +114,7 @@ export default function Toolkit() {
               style={{ color: "#313539" }}
             />
           </div>
-          <div className="erarser" onClick={handleEraserClick}>
+          <div className="eraser">
             <FontAwesomeIcon
               className="custom.icon"
               icon={faEraser}
