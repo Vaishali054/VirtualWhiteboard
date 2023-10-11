@@ -109,7 +109,7 @@ export default function Toolkit() {
           <div className="pens">
             <FontAwesomeIcon
               icon={faPen}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
@@ -117,14 +117,14 @@ export default function Toolkit() {
             <FontAwesomeIcon
               className="custom.icon"
               icon={faEraser}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
           <div className="stickynotes" onClick={toggleStickyNote}>
             <FontAwesomeIcon
               icon={faNoteSticky}
-              size="2x"
+              size="lg"
               style={{ color: "#fecd52" }}
             />
           </div>
@@ -132,7 +132,7 @@ export default function Toolkit() {
             <FontAwesomeIcon
               className="custom.icon"
               icon={faT}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
@@ -140,7 +140,7 @@ export default function Toolkit() {
             <FontAwesomeIcon
               className="custom.icon"
               icon={faShapes}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
@@ -148,7 +148,7 @@ export default function Toolkit() {
             <FontAwesomeIcon
               icon={faDownload}
               className="custom.icon"
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
@@ -214,10 +214,13 @@ export default function Toolkit() {
                   backgroundColor: "black",
                   margin: "0 5px",
                   cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
                 }}
                 onClick={() => handleFontStyleChange("bold")}
               >
-                <FontAwesomeIcon icon={faBold} style={{ color: "white" }} />
+                <FontAwesomeIcon icon={faBold} size="sm" style={{ color: "white" }} />
               </div>
               <div
                 style={{
@@ -227,10 +230,13 @@ export default function Toolkit() {
                   backgroundColor: "black",
                   margin: "0 5px",
                   cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
                 }}
                 onClick={() => handleFontStyleChange("italic")}
               >
-                <FontAwesomeIcon icon={faItalic} style={{ color: "white" }} />
+                <FontAwesomeIcon icon={faItalic} size="sm" style={{ color: "white" }} />
               </div>
               <div
                 style={{
@@ -240,11 +246,14 @@ export default function Toolkit() {
                   backgroundColor: "black",
                   margin: "0 5px",
                   cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
                 }}
                 onClick={() => handleFontStyleChange("underline")}
               >
                 <FontAwesomeIcon
-                  icon={faUnderline}
+                  icon={faUnderline} size="sm"
                   style={{ color: "white" }}
                 />
               </div>
@@ -256,10 +265,13 @@ export default function Toolkit() {
                   backgroundColor: "black",
                   margin: "0 5px",
                   cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
                 }}
                 onClick={toggleColorChoices}
               >
-                <FontAwesomeIcon icon={faCircle} style={{ color: "white" }} />
+                <FontAwesomeIcon icon={faCircle} size="sm" style={{ color: "white" }} />
               </div>
             </div>
           </div>
