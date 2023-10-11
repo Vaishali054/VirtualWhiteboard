@@ -70,6 +70,14 @@ export default function Toolkit() {
   const handleDeleteStickyNote = () => {
     setShowStickyNote(false);
   };
+  //Eraser functionality
+  const handleEraserClick = () => {
+    setIsErasing(!isErasing);
+    setIsDrawing(false);
+    setShowStickyNote(false);
+    setShowText(false);
+    setShowColorChoices(false);
+  };
 
   // download page functionality
   const handleDownloadClick = async () => {
@@ -82,7 +90,12 @@ export default function Toolkit() {
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 },
 
-        jsPDF: { unit: "mm", format: "a1", orientation: "landscape", pagesplit: true},
+        jsPDF: {
+          unit: "mm",
+          format: "a1",
+          orientation: "landscape",
+          pagesplit: true,
+        },
       };
 
       await html2pdf().from(content).set(pdfOptions).outputPdf().save();
@@ -99,11 +112,7 @@ export default function Toolkit() {
     <div className="container-bottom">
       <div className="toolkit">
         <div className="shift-down">
-
-          <div className="slide shadow button">
-         
-          </div>
-
+          <div className="slide shadow button"></div>
         </div>
         <div className="tools shadow">
           <div className="pens">
@@ -113,7 +122,7 @@ export default function Toolkit() {
               style={{ color: "#313539" }}
             />
           </div>
-          <div className="erarser">
+          <div className="erarser" onClick={handleEraserClick}>
             <FontAwesomeIcon
               className="custom.icon"
               icon={faEraser}
