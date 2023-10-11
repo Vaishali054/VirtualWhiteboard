@@ -55,13 +55,7 @@ export default function Toolkit() {
     });
   };
 
-  const colorChoices = [
-    "lightyellow",
-    "lightblue",
-    "lightpink",
-    "pink",
-    "lightgreen",
-  ];
+  const colorChoices = ["lightyellow", "lightblue", "lightpink", "lightpurple"];
 
   const handleColorChange = (color) => {
     setStickyNoteColor(color);
@@ -210,7 +204,7 @@ export default function Toolkit() {
             <div
               style={{
                 display: "flex",
-                alignItems: "center",
+                alignItems: "centre",
                 marginTop: "10px",
               }}
             >
