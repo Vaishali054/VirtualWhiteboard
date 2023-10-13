@@ -18,12 +18,28 @@ import { useWhiteboard } from "../../Provider/Provider";
 import html2pdf from "html2pdf.js";
 
 export default function Toolkit() {
+  //text functionality
+  const [showTextNote, setShowTextNote] = useState(false);
+  const [textNoteText, setTextNoteText] = useState("");
+  const [textNotePosition, setTextNotePosition] = useState({
+    top: "50%",
+    left: "50%",
+    right: "70%",
+  });
+
+  const toggleTextNote = () => {
+    setShowTextNote(!showTextNote);
+  };
+
+  const handleTextNoteChange = (e) => {
+    setTextNoteText(e.target.value);
+  };
   //sticky notes
   const [showStickyNote, setShowStickyNote] = useState(false);
   const [stickyNoteText, setStickyNoteText] = useState("");
   const [stickyNotePosition, setStickyNotePosition] = useState({
     top: "50%",
-    left: "50%",
+    left: "10%",
   });
   const [stickyNoteColor, setStickyNoteColor] = useState("lightyellow");
   const [showColorChoices, setShowColorChoices] = useState(false);
@@ -53,7 +69,7 @@ export default function Toolkit() {
     });
   };
 
-  const colorChoices = ["lightyellow", "lightblue", "lightpink", "lightpurple"];
+  const colorChoices = ["lightyellow", "lightblue", "lightpink"];
 
   const handleColorChange = (color) => {
     setStickyNoteColor(color);
@@ -100,6 +116,29 @@ export default function Toolkit() {
     clearWhiteboard();
   };
 
+  //pen tool
+  const [isColorPickerVisible, setColorPickerVisible] = useState(false);
+  const [penColor, setPenColor] = useState("black");
+
+  const toggleColorPicker = () => {
+    setColorPickerVisible(!isColorPickerVisible);
+  };
+  const handleColorSelection = (selectedColor) => {
+    setPenColor(selectedColor);
+    setColorPickerVisible(false);
+  };
+  const penColorChoices = [
+    "lightgreen",
+    "black",
+    "orange",
+    "blue",
+    "lightpink",
+    "green",
+    "yellow",
+    "lightblue",
+    "lavender",
+  ];
+
   return (
     <div className="container-bottom">
       <div className="toolkit">
@@ -110,30 +149,46 @@ export default function Toolkit() {
           <div className="pens">
             <FontAwesomeIcon
               icon={faPen}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
+              onClick={toggleColorPicker}
             />
+
+            {isColorPickerVisible && (
+              <div className="color-palette-dropdown">
+                <div className="color-palette ">
+                  {penColorChoices.map((color) => (
+                    <div
+                      key={color}
+                      className="color-option"
+                      style={{ backgroundColor: color }}
+                      onClick={() => handleColorSelection(color)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           <div className="eraser">
             <FontAwesomeIcon
               className="custom.icon"
               icon={faEraser}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
           <div className="stickynotes" onClick={toggleStickyNote}>
             <FontAwesomeIcon
               icon={faNoteSticky}
-              size="2x"
+              size="lg"
               style={{ color: "#fecd52" }}
             />
           </div>
-          <div className="text">
+          <div className="text" onClick={toggleTextNote}>
             <FontAwesomeIcon
               className="custom.icon"
               icon={faT}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
@@ -141,7 +196,7 @@ export default function Toolkit() {
             <FontAwesomeIcon
               className="custom.icon"
               icon={faShapes}
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
@@ -149,7 +204,7 @@ export default function Toolkit() {
             <FontAwesomeIcon
               icon={faDownload}
               className="custom.icon"
-              size="2x"
+              size="lg"
               style={{ color: "#313539" }}
             />
           </div>
@@ -171,6 +226,14 @@ export default function Toolkit() {
               borderRadius: "5px",
               boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
               border: "none",
+              // Responsive styles for sticky note
+              width: "200px", // Adjust width as needed
+              height: "150px", // Adjust height as needed
+              "@media (max-width: 768px)": {
+                width: "150px", // Adjust for smaller screens
+                height: "100px",
+                position: "centre",
+              },
             }}
           >
             <span
@@ -215,37 +278,15 @@ export default function Toolkit() {
                   backgroundColor: "black",
                   margin: "0 5px",
                   cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
                 onClick={() => handleFontStyleChange("bold")}
               >
-                <FontAwesomeIcon icon={faBold} style={{ color: "white" }} />
-              </div>
-              <div
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  backgroundColor: "black",
-                  margin: "0 5px",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleFontStyleChange("italic")}
-              >
-                <FontAwesomeIcon icon={faItalic} style={{ color: "white" }} />
-              </div>
-              <div
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  backgroundColor: "black",
-                  margin: "0 5px",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleFontStyleChange("underline")}
-              >
                 <FontAwesomeIcon
-                  icon={faUnderline}
+                  icon={faBold}
+                  size="sm"
                   style={{ color: "white" }}
                 />
               </div>
@@ -257,10 +298,57 @@ export default function Toolkit() {
                   backgroundColor: "black",
                   margin: "0 5px",
                   cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                onClick={() => handleFontStyleChange("italic")}
+              >
+                <FontAwesomeIcon
+                  icon={faItalic}
+                  size="sm"
+                  style={{ color: "white" }}
+                />
+              </div>
+              <div
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  borderRadius: "50%",
+                  backgroundColor: "black",
+                  margin: "0 5px",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                onClick={() => handleFontStyleChange("underline")}
+              >
+                <FontAwesomeIcon
+                  icon={faUnderline}
+                  size="sm"
+                  style={{ color: "white" }}
+                />
+              </div>
+              <div
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  borderRadius: "50%",
+                  backgroundColor: "black",
+                  margin: "0 5px",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
                 onClick={toggleColorChoices}
               >
-                <FontAwesomeIcon icon={faCircle} style={{ color: "white" }} />
+                <FontAwesomeIcon
+                  icon={faCircle}
+                  size="sm"
+                  style={{ color: "white" }}
+                />
               </div>
             </div>
           </div>
@@ -271,10 +359,14 @@ export default function Toolkit() {
             style={{
               position: "fixed",
               top: stickyNotePosition.top,
-              left: stickyNotePosition.left + 40,
+              left: stickyNotePosition.left + 10,
               display: "flex",
               flexDirection: "column",
               zIndex: "1000",
+              // Responsive styles for color choices
+              "@media (max-width: 768px)": {
+                left: stickyNotePosition.left - 10, // Adjust for smaller screens
+              },
             }}
           >
             {colorChoices.map((color) => (
@@ -291,6 +383,57 @@ export default function Toolkit() {
                 onClick={() => handleColorChange(color)}
               />
             ))}
+          </div>
+        )}
+        {showTextNote && (
+          <div
+            className="text-note"
+            style={{
+              top: textNotePosition.top,
+              left: textNotePosition.left,
+              transform: "translate(-50%, -50%)",
+              position: "fixed",
+              backgroundColor: "transparent",
+              zIndex: "1000",
+              padding: "5px",
+              borderRadius: "10px",
+              boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
+              border: "1px solid transparent",
+              // Responsive styles for text note
+              width: "150px", // Adjust width as needed
+              height: "170px", // Adjust height as needed
+              textAlign: "center",
+              "@media (max-width: 768px)": {
+                width: "50px", // for smaller screens
+                height: "50px",
+              },
+            }}
+          >
+            <textarea
+              style={{
+                width: "100%",
+                height: "80%",
+                border: "none",
+                backgroundColor: "transparent",
+                color: "black",
+                fontSize: "16px",
+                resize: "none",
+              }}
+              value={textNoteText}
+              onChange={handleTextNoteChange}
+            />
+            <span
+              style={{
+                position: "absolute",
+                bottom: "5px",
+                right: "5px",
+                cursor: "pointer",
+                fontSize: "20px",
+              }}
+              onClick={toggleTextNote}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
           </div>
         )}
       </div>

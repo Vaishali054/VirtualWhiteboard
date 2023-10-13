@@ -25,7 +25,7 @@
     border-radius: 50%;
     height: 40px;
     width: 40px;   
-    border: none !important; 
+    border: none !important;
 }
 .clear {
     padding: 7px 10px;
@@ -47,7 +47,35 @@
     justify-content: space-between;
     padding: 10px 40px;
     border-radius: 20px;
+    cursor: pointer;
 }
 .custom.icon{
     color: #030201;
 }
+/* pen dropdown */
+.color-palette-dropdown {
+    position: relative;
+  }
+  
+  .color-palette {
+    position: absolute;
+    top: 100%; /* Position below the pen icon */
+    left: 0;
+    width: 100px; /* Adjust the width as needed */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+  }
+  
+  .color-option {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    cursor: pointer;
+  }
+  
+  
