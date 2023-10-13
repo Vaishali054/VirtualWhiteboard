@@ -1,0 +1,43 @@
+nav{
+    display: flex;
+    background-color: #ffffff;
+    height: 60px;
+    justify-content: space-between;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.container1{
+    display: flex;
+    /* justify-content: space-between; */
+    min-width: 300px;
+    margin: 15px 30px ;
+}
+.home{
+    margin: 0px 20px;
+}
+.line{
+    margin: 0px 15px;
+}
+
+.down{
+    margin: 0px 15px;
+}
+.button{
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 20px;
+    cursor: pointer;
+}
+.container2{
+    justify-content: space-between;
+    min-width: 100px;
+    margin: 15px 30px ;
+    display: flex;
+}
+.container2 .button .fa-share {
+    margin-right: 10px; 
+  }

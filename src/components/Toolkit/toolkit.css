@@ -1,0 +1,83 @@
+.toolkit{
+    display: flex;
+    justify-content: center;
+    margin: 10px 30px;
+    
+}
+/* .container-bottom{
+    position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; 
+} */
+.shadow{
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slide {
+  display: flex;
+  flex-direction: column; /* Change to a column layout to place the eye dropper above the buttons */
+  align-items: center; /* Center the items vertically */
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: none !important;
+}
+.clear {
+    padding: 7px 10px;
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    min-width: 120px;
+    text-align: center; 
+    cursor: pointer;
+    border: none !important;
+  }
+  
+
+.tools{
+    display: flex;
+    width: 450px;
+    justify-content: space-between;
+    padding: 10px 40px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.custom.icon{
+    color: #030201;
+}
+/* pen dropdown */
+.color-palette-dropdown {
+    position: relative;
+  }
+  
+  .color-palette {
+    position: absolute;
+    top: 100%; /* Position below the pen icon */
+    left: 0;
+    width: 100px; /* Adjust the width as needed */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+  }
+  
+  .color-option {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    cursor: pointer;
+  }
+  
+  
