@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./toolkit.css";
 import {
   faDownload,
-  faEraser,
   faNoteSticky,
   faPen,
   faShapes,
@@ -13,6 +12,7 @@ import {
   faItalic,
   faUnderline,
   faCircle,
+  faEraser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useWhiteboard } from "../../Provider/Provider";
 import html2pdf from "html2pdf.js";
@@ -116,11 +116,6 @@ export default function Toolkit() {
     clearWhiteboard();
   };
 
-  //eraser
-  const { eraser, toggleEraser } = useWhiteboard();
-
-
-  
   //pen tool
   const [isColorPickerVisible, setColorPickerVisible] = useState(false);
   const [penColor, setPenColor] = useState("black");
@@ -147,41 +142,25 @@ export default function Toolkit() {
   return (
     <div className="container-bottom">
       <div className="toolkit">
-        <div className="shift-down">
-          <div className="slide shadow button"></div>
-        </div>
         <div className="tools shadow">
           <div className="pens">
             <FontAwesomeIcon
               icon={faPen}
               size="lg"
               style={{ color: "#313539" }}
-              // onClick={toggleColorPicker}
+              onClick={toggleColorPicker}
             />
-
-            {/* {isColorPickerVisible && (
-              <div className="color-palette-dropdown">
-                <div className="color-palette ">
-                  {penColorChoices.map((color) => (
-                    <div
-                      key={color}
-                      className="color-option"
-                      style={{ backgroundColor: color }}
-                      onClick={() => handleColorSelection(color)}
-                    ></div>
-                  ))}
-                </div>
-              </div>
-            )} */}
-            
           </div>
-          <div className="erarser">
+          <div className="eraser">
+            {
               <FontAwesomeIcon
                 className="custom.icon"
                 icon={faEraser}
                 size="lg"
+                style={{ color: "#313539" }}
                 onClick={handleClearScreen}
               />
+            }
           </div>
           <div className="stickynotes" onClick={toggleStickyNote}>
             <FontAwesomeIcon
@@ -198,14 +177,6 @@ export default function Toolkit() {
               style={{ color: "#313539" }}
             />
           </div>
-          <div className="shapes">
-            <FontAwesomeIcon
-              className="custom.icon"
-              icon={faShapes}
-              size="lg"
-              style={{ color: "#313539" }}
-            />
-          </div>
           <div className="download" onClick={handleDownloadClick}>
             <FontAwesomeIcon
               icon={faDownload}
@@ -214,9 +185,6 @@ export default function Toolkit() {
               style={{ color: "#313539" }}
             />
           </div>
-        </div>
-        <div className=" button clear shadow" onClick={handleClearScreen}>
-          clear
         </div>
         {showStickyNote && (
           <div
