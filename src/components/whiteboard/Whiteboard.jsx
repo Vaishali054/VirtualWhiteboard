@@ -7,7 +7,7 @@ export default function Whiteboard() {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [color, setColor] = useState('black');
+  const [color, setColor] = useState("black");
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [eraserSize, setEraserSize] = useState(10); // Adjust the size as needed
   useEffect(() => {
@@ -17,11 +17,17 @@ export default function Whiteboard() {
 
     // Set initial canvas size based on the container size
     const container = canvas.parentElement;
-    setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
+    setCanvasSize({
+      width: container.offsetWidth,
+      height: container.offsetHeight,
+    });
 
     // Update canvas size when the window is resized
     const handleResize = () => {
-      setCanvasSize({ width: container.offsetWidth, height: container.offsetHeight });
+      setCanvasSize({
+        width: container.offsetWidth,
+        height: container.offsetHeight,
+      });
     };
     window.addEventListener("resize", handleResize);
 
@@ -89,7 +95,7 @@ export default function Whiteboard() {
       startDrawing({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
     }
   };
-  
+
   const handleTouchMove = (event) => {
     if (event.touches.length === 1) {
       // Prevent scrolling on touch devices
@@ -99,7 +105,7 @@ export default function Whiteboard() {
       draw({ nativeEvent: { offsetX: pageX, offsetY: pageY } });
     }
   };
-  
+
   const handleTouchEnd = (event) => {
     if (event.touches.length === 0) {
       stopDrawing();
@@ -107,7 +113,10 @@ export default function Whiteboard() {
   };
 
   return (
-    <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div
+      className="canvas-container"
+      style={{ position: "relative", width: "100%", height: "100%" }}
+    >
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
