@@ -101,6 +101,11 @@ export default function Toolkit() {
     clearWhiteboard();
   };
 
+  //eraser
+  const { eraser } = useWhiteboard();
+
+
+  
    //pen tool
    const [isColorPickerVisible, setColorPickerVisible] = useState(false);
    const [penColor, setPenColor] = useState("black");
@@ -157,12 +162,12 @@ export default function Toolkit() {
 
           </div>
           <div className="erarser">
-            <FontAwesomeIcon
-              className="custom.icon"
-              icon={faEraser}
-              size="lg"
-              style={{ color: "#313539" }}
-            />
+              <FontAwesomeIcon
+                className="custom.icon"
+                icon={faEraser}
+                size="lg"
+                onClick={eraser}
+              />
           </div>
           <div className="stickynotes" onClick={toggleStickyNote}>
             <FontAwesomeIcon

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useWhiteboard } from "../../Provider/Provider";
 
+
 export default function Whiteboard() {
   const { clearScreen, resetClearScreen, zoomLevel } = useWhiteboard();
   const canvasRef = useRef(null);
@@ -8,7 +9,7 @@ export default function Whiteboard() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState('black');
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
-
+  const [eraserSize, setEraserSize] = useState(10); // Adjust the size as needed
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -69,6 +70,7 @@ export default function Whiteboard() {
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.strokeStyle = color;
     contextRef.current.stroke();
+    // const context = contextRef.current;
   };
 
   const stopDrawing = () => {
@@ -115,13 +117,13 @@ export default function Whiteboard() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        style={{ touchAction: "none", width: "100vw", height: "85vh" }}
+        style={{ touchAction: "none", width: "100vw", height: "75vh" }}
       />
-      <input
+      {/* <input
         type="color"
         value={color}
         onChange={(e) => setColor(e.target.value)}
-      />
+      /> */}
     </div>
   );
 }

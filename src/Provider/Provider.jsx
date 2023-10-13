@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useRef } from "react";
 
 const WhiteboardContext = createContext();
 
@@ -12,7 +12,9 @@ export const WhiteboardProvider = ({ children }) => {
   const [canvases, setCanvases] = useState([]);
   //pen color functionality
   const [color, setColor] = useState("#000000"); //default color
-
+  //eraser
+  const [isErasing, setIsErasing] = useState(false);
+  const contextRef = useRef(null);
 
   const clearWhiteboard = () => {
     setClearScreen(true);
@@ -35,16 +37,36 @@ const zoomOut = () => {
     }
   };
   
+  const eraser = () => {
+    const context = contextRef.current;
+  
+    if (!context) {
+      return; // Ensure context is available
+    }
+  
+    if (isErasing) {
+      context.globalCompositeOperation = "destination-out";
+      context.strokeStyle = 'white'; // Set the color to white for erasing
+    } else {
+      context.globalCompositeOperation = "source-over";
+      context.strokeStyle = color; // Set the current color
+    }
+  };
+  
+
+  const toggleEraser = () => {
+    setIsErasing(!isErasing);
+  };
 
   return (
-    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut,canvases,setCanvases, color, setColor}}>
+    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut,canvases,setCanvases, color, setColor, eraser, isErasing, toggleEraser}}>
       {children}
-      <div>
+      {/* <div>
         <input 
           type="color"
           value={color}
           onChange={(e)=>setColor(e.target.value)}/>
-      </div>
+      </div> */}
     </WhiteboardContext.Provider>
   );
 };
