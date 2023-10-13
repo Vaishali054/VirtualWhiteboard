@@ -144,9 +144,7 @@ export default function Whiteboard() {
           size="lg"
           style={{
             color: "#313539",
-            cursor: "pointer",
-            marginLeft: "22px",
-            marginBottom: "auto",
+            cursor: "pointer"
           }}
           onClick={toggleColorPicker}
         />
