@@ -18,14 +18,16 @@
     justify-content: center;
     align-items: center;
 }
-.slide{
-    display: flex;
-    justify-content: space-between;
-    padding: 7px 10px;
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;   
-    border: none !important;
+.slide {
+  display: flex;
+  flex-direction: column; /* Change to a column layout to place the eye dropper above the buttons */
+  align-items: center; /* Center the items vertically */
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: none !important;
 }
 .clear {
     padding: 7px 10px;

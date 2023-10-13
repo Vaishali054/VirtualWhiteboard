@@ -1,15 +1,18 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useWhiteboard } from "../../Provider/Provider";
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeDropper} from "@fortawesome/free-solid-svg-icons";
+import "./whiteboard.css";
 export default function Whiteboard() {
-  const { clearScreen, resetClearScreen, zoomLevel } = useWhiteboard();
+  const { clearScreen, resetClearScreen, zoomLevel, isErasing, eraser } = useWhiteboard();
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState("black");
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   const [eraserSize, setEraserSize] = useState(10); // Adjust the size as needed
+  const [isColorPickerVisible, setColorPickerVisible] = useState(false);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -61,12 +64,20 @@ export default function Whiteboard() {
   }, [canvasSize]);
 
   const startDrawing = (event) => {
-    // event.preventDefault();
-    const { offsetX, offsetY } = event.nativeEvent;
+  const canvas = canvasRef.current;
+  const context = canvas.getContext("2d");
+  const { offsetX, offsetY } = event.nativeEvent;
+
+  if (isErasing) {
+    context.strokeStyle = 'white'; // Use white color for eraser
+    eraser(offsetX, offsetY); // Call the eraser function
+  } else {
+    context.strokeStyle = 'black';
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     setIsDrawing(true);
-  };
+  }
+};
 
   const draw = (event) => {
     // event.preventDefault();
@@ -111,12 +122,31 @@ export default function Whiteboard() {
       stopDrawing();
     }
   };
+  const toggleColorPicker = () => {
+    setColorPickerVisible(!isColorPickerVisible);
+  };
+
+  const handleColorChange = (e) => {
+    setColor(e.target.value);
+    setColorPickerVisible(false);
+  };
 
   return (
-    <div
-      className="canvas-container"
-      style={{ position: "relative", width: "100%", height: "100%" }}
-    >
+    <div className="canvas-container" style={{ position: "relative", width: "100%", height: "100%" }}>
+     <div className="translate">
+      <FontAwesomeIcon className="faDropper"
+        icon={faEyeDropper}
+        size="lg"
+        style={{ color: "#313539", cursor: "pointer" }}
+        onClick={toggleColorPicker}
+      />
+      {isColorPickerVisible && (
+        <div className="color-picker">
+          <input type="color" value={color} onChange={handleColorChange} />
+        </div>
+      )}
+    </div>
+
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}

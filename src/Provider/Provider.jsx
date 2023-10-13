@@ -36,26 +36,24 @@ const zoomOut = () => {
       setZoomLevel(zoomLevel - 0.1); // You can adjust the zoom decrement as needed
     }
   };
-  
-  const eraser = () => {
+
+  const eraser = (x, y) => {
     const context = contextRef.current;
-  
+
     if (!context) {
-      return; // Ensure context is available
+      return;
     }
-  
+
     if (isErasing) {
-      context.globalCompositeOperation = "destination-out";
-      context.strokeStyle = 'white'; // Set the color to white for erasing
+      context.strokeStyle = 'white'; // Use white color for eraser
     } else {
-      context.globalCompositeOperation = "source-over";
       context.strokeStyle = color; // Set the current color
     }
   };
   
 
   const toggleEraser = () => {
-    setIsErasing(!isErasing);
+    setIsErasing(isErasing);
   };
 
   return (

@@ -117,7 +117,7 @@ export default function Toolkit() {
   };
 
   //eraser
-  const { eraser } = useWhiteboard();
+  const { eraser, toggleEraser } = useWhiteboard();
 
 
   
@@ -156,10 +156,10 @@ export default function Toolkit() {
               icon={faPen}
               size="lg"
               style={{ color: "#313539" }}
-              onClick={toggleColorPicker}
+              // onClick={toggleColorPicker}
             />
 
-            {isColorPickerVisible && (
+            {/* {isColorPickerVisible && (
               <div className="color-palette-dropdown">
                 <div className="color-palette ">
                   {penColorChoices.map((color) => (
@@ -172,14 +172,15 @@ export default function Toolkit() {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
+            
           </div>
           <div className="erarser">
               <FontAwesomeIcon
                 className="custom.icon"
                 icon={faEraser}
                 size="lg"
-                onClick={eraser}
+                onClick={handleClearScreen}
               />
           </div>
           <div className="stickynotes" onClick={toggleStickyNote}>
