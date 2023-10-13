@@ -116,6 +116,11 @@ export default function Toolkit() {
     clearWhiteboard();
   };
 
+  //eraser
+  const { eraser, toggleEraser } = useWhiteboard();
+
+
+  
   //pen tool
   const [isColorPickerVisible, setColorPickerVisible] = useState(false);
   const [penColor, setPenColor] = useState("black");
@@ -151,10 +156,10 @@ export default function Toolkit() {
               icon={faPen}
               size="lg"
               style={{ color: "#313539" }}
-              onClick={toggleColorPicker}
+              // onClick={toggleColorPicker}
             />
 
-            {isColorPickerVisible && (
+            {/* {isColorPickerVisible && (
               <div className="color-palette-dropdown">
                 <div className="color-palette ">
                   {penColorChoices.map((color) => (
@@ -167,15 +172,16 @@ export default function Toolkit() {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
+            
           </div>
-          <div className="eraser">
-            <FontAwesomeIcon
-              className="custom.icon"
-              icon={faEraser}
-              size="lg"
-              style={{ color: "#313539" }}
-            />
+          <div className="erarser">
+              <FontAwesomeIcon
+                className="custom.icon"
+                icon={faEraser}
+                size="lg"
+                onClick={handleClearScreen}
+              />
           </div>
           <div className="stickynotes" onClick={toggleStickyNote}>
             <FontAwesomeIcon

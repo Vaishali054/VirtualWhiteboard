@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useRef } from "react";
 
 const WhiteboardContext = createContext();
 
@@ -12,7 +12,9 @@ export const WhiteboardProvider = ({ children }) => {
   const [canvases, setCanvases] = useState([]);
   //pen color functionality
   const [color, setColor] = useState("#000000"); //default color
-
+  //eraser
+  const [isErasing, setIsErasing] = useState(false);
+  const contextRef = useRef(null);
 
   const clearWhiteboard = () => {
     setClearScreen(true);
@@ -34,17 +36,35 @@ const zoomOut = () => {
       setZoomLevel(zoomLevel - 0.1); // You can adjust the zoom decrement as needed
     }
   };
+
+  const eraser = (x, y) => {
+    const context = contextRef.current;
+
+    if (!context) {
+      return;
+    }
+
+    if (isErasing) {
+      context.strokeStyle = 'white'; // Use white color for eraser
+    } else {
+      context.strokeStyle = color; // Set the current color
+    }
+  };
   
 
+  const toggleEraser = () => {
+    setIsErasing(isErasing);
+  };
+
   return (
-    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut,canvases,setCanvases, color, setColor}}>
+    <WhiteboardContext.Provider value={{ clearScreen, clearWhiteboard, resetClearScreen,zoomIn,zoomOut,canvases,setCanvases, color, setColor, eraser, isErasing, toggleEraser}}>
       {children}
-      <div>
+      {/* <div>
         <input 
           type="color"
           value={color}
           onChange={(e)=>setColor(e.target.value)}/>
-      </div>
+      </div> */}
     </WhiteboardContext.Provider>
   );
 };
